@@ -1,4 +1,4 @@
-# Music-Downloader
+# ZAP-UP API
 Simple project to download music from Youtube.
 
 # Packages
@@ -8,7 +8,4 @@ Simple project to download music from Youtube.
 - [youtube-sr](https://www.npmjs.com/package/youtube-sr)
 - [cors](https://www.npmjs.com/package/cors)
 
-# Created by Taps
-
-# Credits
-**❤ Thank's [Snowflake](https://github.com/Snowflake107)**
+# Created by Bicepsfako
