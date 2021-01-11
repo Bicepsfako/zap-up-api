@@ -1,0 +1,37 @@
+{
+  "name": "music-loader",
+  "version": "1.0.0",
+  "description": "An easy way to download music.",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "youtube-sr": "^2.0.5",
+    "ytdl-core": "^4.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TapsHTS/music-loader.git"
+  },
+  "keywords": [
+    "download",
+    "music",
+    "music",
+    "download",
+    "download",
+    "music",
+    "html"
+  ],
+  "author": "Taps",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TapsHTS/music-loader/issues"
+  },
+  "homepage": "https://github.com/TapsHTS/music-loader#readme"
+}
