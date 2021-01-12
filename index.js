@@ -18,7 +18,7 @@ async function downloadVideo(video, res) {
 
 async function searchVideo(video, res) {
         if (!video) return res.json({ error: 'Wtf?' });
-        await youtube.search(video).then(async video => {
+        await youtube.search(video, { type: 'video' }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
             res.json(video);
@@ -38,7 +38,7 @@ async function getVideoInfo(video, res) {
 
 async function searchPlaylist(playlist, res) {
         if (!playlist) return res.json({ error: 'Wtf?' });
-        await youtube.getPlaylist(playlist).then(async playlist => {
+        await youtube.search(playlist, { type: 'playlist' }).then(async playlist => {
             if (!video[0]) return res.json({ error: 'No playlist found!' });
 
             res.json({ playlist });
