@@ -21,7 +21,7 @@ async function searchVideo(video, res) {
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
-            res.send(video);
+            res.json(video);
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
