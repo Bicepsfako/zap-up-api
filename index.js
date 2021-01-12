@@ -25,7 +25,6 @@ async function getVideoInfo(video, res) {
             if (err) throw err;
             var songTitle = info.title //you can store it here
             console.log(songTitle);
-            }
             });
         }).catch(err => res.send('API Error!'));
 };
