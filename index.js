@@ -4,7 +4,7 @@ const app = express();
 const youtube = require('youtube-sr');
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: true}));
 
 async function downloadVideo(video, res) {
         if (!video) return res.send('Fuck?');
