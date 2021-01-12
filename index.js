@@ -3,6 +3,9 @@ const ytdl = require("ytdl-core");
 const app = express();
 const youtube = require('youtube-sr');
 
+app.use(express.json());
+app.use(express.urlencoded());
+
 async function downloadVideo(video, res) {
         if (!video) return res.send('Fuck?');
         await youtube.search(video, { limit: 1 }).then(async video => {
@@ -19,6 +22,7 @@ async function getVideoInfo(video, res) {
             if (!video[0]) return res.send('No video found!');
 
             await ytdl.getInfo(video[0].url, function(err, info) {
+            if(err) return res.json({ err });
             res.json({ info });
             });
         }).catch(err => res.send('API Error!'));
