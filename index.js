@@ -19,7 +19,7 @@ async function getVideoInfo(video, res) {
             if (!video[0]) return res.send('No video found!');
 
             await ytdl.getInfo(video[0].id, function(err, info) {
-            res.json(info);
+            res.json({ info });
             });
         }).catch(err => res.send('API Error!'));
 };
