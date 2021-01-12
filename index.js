@@ -20,7 +20,7 @@ async function downloadVideo(video, res) {
 
 async function searchVideo(video, res) {
         if (!video) return res.json({ error: 'Wtf?' });
-        await youtube.search(video, { type: 'video' }).then(async video => {
+        await youtube.search(video).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
             res.json(video);
@@ -37,7 +37,7 @@ async function getVideoInfo(video, res) {
 
 async function searchPlaylist(playlist, res) {
         if (!playlist) return res.json({ error: 'Wtf?' });
-        await youtube.search(playlist, { type: 'playlist', limit: 20 }).then(async playlist => {
+        await youtube.getPlaylist(playlist).then(async playlist => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
 
             const playlistData = playlist;
@@ -50,8 +50,8 @@ app.get("/", (req, res) => {
     return res.send('mert cimke#4741');
 });
 
-app.get("/api/youtube/play/:title", async (req, res) => {
-    let video = decodeURIComponent(req.params.title);
+app.get("/api/youtube/play/*", async (req, res) => {
+    let video = decodeURIComponent(req.params[0]);
     if (!video) return res.json({ error: 'Invalid Parameters!' });
     return await downloadVideo(video, res);
 });
@@ -68,8 +68,8 @@ app.get("/api/youtube/info/*", async (req, res) => {
     return await getVideoInfo(video, res);
 });
 
-app.get("/api/youtube/playlist/:title", async (req, res) => {
-    let playlist = decodeURIComponent(req.params.title);
+app.get("/api/youtube/playlist/*", async (req, res) => {
+    let playlist = decodeURIComponent(req.params[0]);
     if (!playlist) return res.json({ error: 'Invalid Parameters!' });
     return await searchPlaylist(playlist, res);
 });
