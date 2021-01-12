@@ -31,7 +31,7 @@ async function getVideoInfo(video, res) {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
             const videoData = await ytdl.getBasicInfo(video[0].url);
-            res.json({ videoData });
+            res.json({ videoData[0] });
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
