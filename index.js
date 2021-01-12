@@ -21,8 +21,8 @@ async function getVideoInfo(video, res) {
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
-            var info = video[0];
-            res.json({ info });
+            const videoData = await ytdl.getBasicInfo(video[0].url);
+            res.json({ videoData });
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
