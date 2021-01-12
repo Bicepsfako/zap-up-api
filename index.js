@@ -11,19 +11,14 @@ async function downloadVideo(video, res) {
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
-            //var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
-            var stream = await ytdl(video[0].id, {
-                quality: 'highestaudio',
-                opusEncoded: true,
-                highWaterMark: 1 << 25
-            })
+            var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
             await stream.pipe(res);
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 async function searchVideo(video, res) {
-        if (!video) return res.json({ error: 'Wtf?' });
-        await youtube.search(video, { limit: 1 }).then(async video => {
+        if (!search) return res.json({ error: 'Wtf?' });
+        await youtube.search(video).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
             res.json(video);
@@ -43,7 +38,7 @@ async function getVideoInfo(video, res) {
 async function searchPlaylist(playlist, res) {
         if (!playlist) return res.json({ error: 'Wtf?' });
         await youtube.getPlaylist(playlist).then(async playlist => {
-            if (!video[0]) return res.json({ error: 'No video found!' });
+            if (!video[0]) return res.json({ error: 'No playlist found!' });
 
             res.json({ playlist });
         }).catch(err => res.json({ error: 'API Error: ' + err }));
