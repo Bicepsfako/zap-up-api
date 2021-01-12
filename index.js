@@ -29,13 +29,10 @@ async function searchVideo(video, res) {
 
 async function getVideoInfo(video, res) {
         if (!video) return res.json({ error: 'Wtf?' });
-        await youtube.search(video, { limit: 1 }).then(async video => {
-            if (!video[0]) return res.json({ error: 'No video found!' });
-
-            const videoData = await ytdl.getBasicInfo(video[0].url);
+  
+            const videoData = await ytdl.getBasicInfo(video);
             const info = videoData.videoDetails;
             res.json({ info });
-        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 async function searchPlaylist(playlist, res) {
@@ -65,8 +62,8 @@ app.get("/api/youtube/search/:title", async (req, res) => {
     return await searchVideo(video, res);
 });
 
-app.get("/api/youtube/info/:title", async (req, res) => {
-    let video = decodeURIComponent(req.params.title);
+app.get("/api/youtube/info/:url", async (req, res) => {
+    let video = decodeURIComponent(req.params.url);
     if (!video) return res.json({ error: 'Invalid Parameters!' });
     return await getVideoInfo(video, res);
 });
