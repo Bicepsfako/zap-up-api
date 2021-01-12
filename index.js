@@ -2,9 +2,6 @@ const express = require("express");
 const ytdl = require("ytdl-core");
 const app = express();
 const youtube = require('youtube-sr');
-const cors = require('cors');
-
-app.use(cors());
 
 async function downloadVideo(video, res) {
         if (!video) return res.send('Fuck?');
