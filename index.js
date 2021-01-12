@@ -23,7 +23,6 @@ async function getVideoInfo(video, res) {
 
             var getinfo = await ytdl.getBasicInfo(video[0].url);
             res.json({ getinfo.videoDetails });
-            });
         }).catch(err => res.send('API Error!'));
 };
 
