@@ -63,7 +63,7 @@ app.get("/api/youtube/search/:title", async (req, res) => {
 });
 
 app.get("/api/youtube/info/*", async (req, res) => {
-    let video = decodeURIComponent(req.params.url);
+    let video = decodeURIComponent(req.params[0]);
     if (!video) return res.json({ error: 'Invalid Parameters!' });
     return await getVideoInfo(video, res);
 });
