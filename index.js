@@ -2,7 +2,9 @@ const express = require("express");
 const ytdl = require("ytdl-core");
 const app = express();
 const youtube = require('youtube-sr');
+const cors = require('cors');
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
