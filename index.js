@@ -32,7 +32,7 @@ async function getVideoInfo(video, res) {
   
             const videoData = await ytdl.getBasicInfo(video);
             const info = videoData.videoDetails;
-            res.json({ info });
+            res.json(info);
 };
 
 async function searchPlaylist(playlist, res) {
@@ -40,9 +40,7 @@ async function searchPlaylist(playlist, res) {
         await youtube.getPlaylist(playlist).then(async playlist => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
 
-            const playlistData = playlist;
-
-            res.json({ playlistData });
+            res.json(playlist);
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
