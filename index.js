@@ -17,7 +17,7 @@ async function downloadVideo(video, res) {
 };
 
 async function searchVideo(video, res) {
-        if (!search) return res.json({ error: 'Wtf?' });
+        if (!video) return res.json({ error: 'Wtf?' });
         await youtube.search(video).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
