@@ -42,13 +42,13 @@ app.get("/", (req, res) => {
 app.get("/api/youtube/play/:title", async (req, res) => {
     let video = decodeURIComponent(req.params.title);
     if (!video) return res.json({ error: 'Invalid Parameters!' });
-    return await searchVideo(video, res);
+    return await downloadVideo(video, res);
 });
 
 app.get("/api/youtube/search/:title", async (req, res) => {
     let video = decodeURIComponent(req.params.title);
     if (!video) return res.json({ error: 'Invalid Parameters!' });
-    return await getVideoInfo(video, res);
+    return await searchVideo(video, res);
 });
 
 app.get("/api/youtube/playlist/:title", async (req, res) => {
