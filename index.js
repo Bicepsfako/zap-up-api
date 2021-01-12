@@ -11,7 +11,12 @@ async function downloadVideo(video, res) {
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
-            var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
+            //var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
+            var stream = await ytdl(video[0].id, {
+                quality: 'highestaudio',
+                opusEncoded: true,
+                highWaterMark: 1 << 25
+            })
             await stream.pipe(res);
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
