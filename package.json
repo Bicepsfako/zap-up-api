@@ -1,7 +1,7 @@
 {
-  "name": "music-loader",
+  "name": "zap-up-api",
   "version": "1.0.0",
-  "description": "An easy way to download music.",
+  "description": "Official ZAP-UP Discord Bot API Wrapper.",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1",
@@ -15,21 +15,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TapsHTS/music-loader.git"
+    "url": "git+https://github.com/Bicepsfako/zap-up-api.git"
   },
   "keywords": [
     "download",
     "music",
-    "music",
-    "download",
-    "download",
-    "music",
-    "html"
+    "api",
+    "playlist",
+    "search",
+    "info",
+    "play"
   ],
-  "author": "Taps",
+  "author": "Bicepsfako",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TapsHTS/music-loader/issues"
+    "url": "https://github.com/Bicepsfako/zap-up-api/issues"
   },
-  "homepage": "https://github.com/TapsHTS/music-loader#readme"
+  "homepage": "https://github.com/Bicepsfako/zap-up-api#readme"
 }
