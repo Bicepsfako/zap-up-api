@@ -31,8 +31,8 @@ async function getVideoInfo(video, res) {
         if (!video) return res.json({ error: 'Wtf?' });
   
             const videoData = await ytdl.getBasicInfo(video);
-            const videoDetails = videoData.videoDetails;
-            res.json({ videoDetails });
+            const info = videoData.videoDetails;
+            res.json({ videoDetails: info });
 };
 
 async function searchPlaylist(playlist, res) {
