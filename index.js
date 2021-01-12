@@ -21,9 +21,11 @@ async function getVideoInfo(video, res) {
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.send('No video found!');
 
-            ytdl.getInfo(video[0].url, function(err, info) {
-            if(err) return res.json({ err });
-            res.json({ info });
+            ytdl.getInfo(video[0].url,{downloadURL: true}, function(err, info) {
+            if (err) throw err;
+            var songTitle = info.title //you can store it here
+            console.log(songTitle);
+            }
             });
         }).catch(err => res.send('API Error!'));
 };
