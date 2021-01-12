@@ -43,7 +43,9 @@ async function searchPlaylist(playlist, res) {
         await youtube.search(playlist, { type: 'playlist', limit: 20 }).then(async playlist => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
 
-            res.json({ playlist });
+            const playlistData = playlist;
+
+            res.json({ playlistData });
         }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
