@@ -7,38 +7,38 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 async function downloadVideo(video, res) {
-        if (!video) return res.send('Fuck?');
+        if (!video) return res.json({ error: 'Wtf?' });
         await youtube.search(video, { limit: 1 }).then(async video => {
-            if (!video[0]) return res.send('No video found!');
+            if (!video[0]) return res.json({ error: 'No video found!' });
 
             var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
             await stream.pipe(res);
-        }).catch(err => res.send('API Error!'));
+        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 async function getVideoInfo(video, res) {
-        if (!video) return res.send('Fuck?');
+        if (!video) return res.json({ error: 'Wtf?' });
         await youtube.search(video, { limit: 1 }).then(async video => {
-            if (!video[0]) return res.send('No video found!');
+            if (!video[0]) return res.json({ error: 'No video found!' });
 
             var info = video[0];
             res.json({ info });
-        }).catch(err => res.send('API Error!'));
+        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 app.get("/", (req, res) => {
     return res.send('mert cimke#4741');
 });
 
-app.get("/api/youtube/:title", async (req, res) => {
+app.get("/api/youtube/play/:title", async (req, res) => {
     let video = decodeURIComponent(req.params.title);
-    if (!video) return res.send('Invalid Parameters!');
+    if (!video) return res.json({ error: 'Invalid Parameters!' });
     return await downloadVideo(video, res);
 });
 
 app.get("/api/youtube/info/:title", async (req, res) => {
     let video = decodeURIComponent(req.params.title);
-    if (!video) return res.send('Invalid Parameters!');
+    if (!video) return res.json({ error: 'Invalid Parameters!' });
     return await getVideoInfo(video, res);
 });
 
