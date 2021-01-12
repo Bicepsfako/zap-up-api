@@ -13,6 +13,17 @@ async function downloadVideo(video, res) {
         }).catch(err => res.send('API Error!'));
 };
 
+async function getVideoInfo(video, res) {
+        if (!video) return res.send('Fuck?');
+        await youtube.search(video, { limit: 1 }).then(async video => {
+            if (!video[0]) return res.send('No video found!');
+
+            await ytdl.getInfo(video[0].id, function(err, info) {
+            res.json(info);
+            });
+        }).catch(err => res.send('API Error!'));
+};
+
 app.get("/", (req, res) => {
     return res.send('mert cimke#4741');
 });
@@ -21,6 +32,12 @@ app.get("/api/youtube/:title", async (req, res) => {
     let video = decodeURIComponent(req.params.title);
     if (!video) return res.send('Invalid Parameters!');
     return await downloadVideo(video, res);
+});
+
+app.get("/api/youtube/info/:title", async (req, res) => {
+    let video = decodeURIComponent(req.params.title);
+    if (!video) return res.send('Invalid Parameters!');
+    return await getVideoInfo(video, res);
 });
 
 app.listen(process.env.PORT, () => console.log("API Running!"));
