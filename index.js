@@ -39,7 +39,7 @@ async function getVideoInfo(video, res) {
 async function searchPlaylist(playlist, res) {
         if (!playlist) return res.json({ error: 'Wtf?' });
         await youtube.search(playlist, { type: 'playlist' }).then(async playlist => {
-            if (!video[0]) return res.json({ error: 'No playlist found!' });
+            if (!playlist[0]) return res.json({ error: 'No playlist found!' });
 
             res.json({ playlist });
         }).catch(err => res.json({ error: 'API Error: ' + err }));
