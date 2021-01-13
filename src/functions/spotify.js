@@ -1,12 +1,15 @@
 const Spotify = require("spotify-api.js");
 const Auth = new Spotify.Auth();
-const token = async () => { await Auth.get({
+const Init = async() => {
+const token = await Auth.get({
     client_id: "3d3e1615331a4076a367c9b947cf187d",
     client_secret: "e10cd4e285ae412e9e88a1b996977e41",
-})
+});
+console.log(token);
+const spotify = new Spotify.Client(token);
 };
-console.log(token());
-const spotify = new Spotify.Client(token());
+
+Init();
 
 const searchVideo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
