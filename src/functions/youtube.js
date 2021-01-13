@@ -8,7 +8,7 @@ const playVideo = async(video, res) => {
 
             var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
             await stream.pipe(res);
-        }).catch(err => return res.json({ error: 'API Error: ' + err }));
+        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 const searchVideo = async(video, res) => {
@@ -18,7 +18,7 @@ const searchVideo = async(video, res) => {
             if (!video[0]) return res.json({ error: 'No video found!' });
 
             res.json(video);
-        }).catch(err => return res.json({ error: 'API Error: ' + err }));
+        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 const getVideoInfo = async(video, res) => {
@@ -35,7 +35,7 @@ const getPlaylist = async(playlist, res) => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
 
             res.json(playlist);
-        }).catch(err => return res.json({ error: 'API Error: ' + err }));
+        }).catch(err => res.json({ error: 'API Error: ' + err }));
 };
 
 module.exports = {
