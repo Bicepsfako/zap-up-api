@@ -7,7 +7,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "youtube-sr": "^2.0.5",
-    "ytdl-core": "^4.4.2",
+    "ytdl-core": "^4.4.3",
     "spotify-api.js": "^5.0.3"
   },
   "devDependencies": {},
