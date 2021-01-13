@@ -1,7 +1,7 @@
 const ytdl = require("ytdl-core");
 const youtube = require('youtube-sr');
 
-const playVideo = async(video, res) {
+const playVideo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
         await youtube.search(video, { limit: 1 }).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
@@ -11,7 +11,7 @@ const playVideo = async(video, res) {
         }).catch(err => return res.json({ error: 'API Error: ' + err }));
 };
 
-const searchVideo = async(video, res) {
+const searchVideo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
 
         await youtube.search(video).then(async video => {
@@ -21,7 +21,7 @@ const searchVideo = async(video, res) {
         }).catch(err => return res.json({ error: 'API Error: ' + err }));
 };
 
-const getVideoInfo = async(video, res) {
+const getVideoInfo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
   
         const videoData = await ytdl.getBasicInfo(video);
@@ -29,7 +29,7 @@ const getVideoInfo = async(video, res) {
         res.json({ videoDetails: info });
 };
 
-const getPlaylist = async(playlist, res) {
+const getPlaylist = async(playlist, res) => {
         if (!playlist) return res.json({ error: 'Wtf?' });
         await youtube.getPlaylist(playlist).then(async playlist => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
