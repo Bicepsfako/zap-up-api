@@ -6,7 +6,7 @@ const token = async () => { return await Auth.get({
 })
 };
 console.log(token());
-const spotify = new Spotify.Client(token);
+const spotify = new Spotify.Client(token());
 
 const searchVideo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
