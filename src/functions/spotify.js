@@ -1,13 +1,11 @@
+"use strict";
+
+(async () => {
 const Spotify = require("spotify-api.js");
 const Auth = new Spotify.Auth();
 
 const searchVideo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
-const token = await Auth.get({
-    client_id: "3d3e1615331a4076a367c9b947cf187d",
-    client_secret: "e10cd4e285ae412e9e88a1b996977e41",
-});
-const spotify = new Spotify.Client(token);
 
         await spotify.tracks.search(video).then(async video => {
             if (!video[0]) return res.json({ error: 'No video found!' });
@@ -18,11 +16,6 @@ const spotify = new Spotify.Client(token);
 
 const getVideoInfo = async(video, res) => {
         if (!video) return res.json({ error: 'Wtf?' });
-const token = await Auth.get({
-    client_id: "3d3e1615331a4076a367c9b947cf187d",
-    client_secret: "e10cd4e285ae412e9e88a1b996977e41",
-});
-const spotify = new Spotify.Client(token);
 
         const info = await spotify.tracks.get(video);
         res.json(info);
@@ -30,11 +23,6 @@ const spotify = new Spotify.Client(token);
 
 const getPlaylist = async(playlist, res) => {
         if (!playlist) return res.json({ error: 'Wtf?' });
-const token = await Auth.get({
-    client_id: "3d3e1615331a4076a367c9b947cf187d",
-    client_secret: "e10cd4e285ae412e9e88a1b996977e41",
-});
-const spotify = new Spotify.Client(token);
 
         await spotify.playlists.get(playlist).then(async playlist => {
             if (!playlist) return res.json({ error: 'No playlist found!' });
@@ -48,3 +36,4 @@ module.exports = {
    getVideoInfo,
    getPlaylist
 };
+});
