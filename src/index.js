@@ -1,13 +1,6 @@
 const express = require("express");
-const Spotify = require("spotify-api.js");
 const YouTube = require("./functions/youtube.js");
-const Auth = new Spotify.Auth();
-const token = async () => { await Auth.get({
-    client_id: "3d3e1615331a4076a367c9b947cf187d",
-    client_secret: "e10cd4e285ae412e9e88a1b996977e41",
-})
-};
-const spotify = new Spotify.Client(token);
+const Spotify = require("./functions/spotify.js");
 const cors = require('cors');
 const app = express();
 
@@ -28,9 +21,9 @@ async function Switch(video, type, method, res) {
     else if(method == "playlist") return await YouTube.getPlaylist(video, res);
     break;
   case 'spotify':
-    if(method == "search") return await YouTube.searchVideo(video, res);
-    else if(method == "info") return await YouTube.getVideoInfo(video, res);
-    else if(method == "playlist") return await YouTube.getPlaylist(video, res);
+    if(method == "search") return await Spotify.searchVideo(video, res);
+    else if(method == "info") return await Spotify.getVideoInfo(video, res);
+    else if(method == "playlist") return await Spotify.getPlaylist(video, res);
     break;
   default:
     return res.json({ error: 'Wtf?' });
