@@ -1,7 +1,6 @@
 const express = require("express");
-const ytdl = require("ytdl-core");
-const youtube = require('youtube-sr');
 const Spotify = require("spotify-api.js");
+const YouTube = require("./functions/youtube.js");
 const Auth = new Spotify.Auth();
 const token = async () => { await Auth.get({
     client_id: "3d3e1615331a4076a367c9b947cf187d",
@@ -16,43 +15,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-async function downloadVideo(video, res) {
-        if (!video) return res.json({ error: 'Wtf?' });
-        await youtube.search(video, { limit: 1 }).then(async video => {
-            if (!video[0]) return res.json({ error: 'No video found!' });
-
-            var stream = await ytdl(video[0].id, { quality: 'highestaudio' });
-            await stream.pipe(res);
-        }).catch(err => res.json({ error: 'API Error: ' + err }));
-};
-
-async function searchVideo(video, res) {
-        if (!video) return res.json({ error: 'Wtf?' });
-
-        await youtube.search(video).then(async video => {
-            if (!video[0]) return res.json({ error: 'No video found!' });
-
-            res.json(video);
-        }).catch(err => res.json({ error: 'API Error: ' + err }));
-};
-
-async function getVideoInfo(video, res) {
-        if (!video) return res.json({ error: 'Wtf?' });
-  
-        const videoData = await ytdl.getBasicInfo(video);
-        const info = videoData.videoDetails;
-        res.json({ videoDetails: info });
-};
-
-async function searchPlaylist(playlist, res) {
-        if (!playlist) return res.json({ error: 'Wtf?' });
-        await youtube.getPlaylist(playlist).then(async playlist => {
-            if (!playlist) return res.json({ error: 'No playlist found!' });
-
-            res.json(playlist);
-        }).catch(err => res.json({ error: 'API Error: ' + err }));
-};
-
 async function Switch(video, type, method, res) {
         if (!video) return res.json({ error: 'Wtf?' });
         if (!type) return res.json({ error: 'Wtf?' });
@@ -60,15 +22,15 @@ async function Switch(video, type, method, res) {
 
         switch (type) {
   case 'youtube':
-    if(method == "play") return downloadVideo(video, res);
-    else if(method == "search") return searchVideo(video, res);
-    else if(method == "info") return getVideoInfo(video, res);
-    else if(method == "playlist") return searchPlaylist(video, res);
+    if(method == "play") return await YouTube.playVideo(video, res);
+    else if(method == "search") return await YouTube.searchVideo(video, res);
+    else if(method == "info") return await YouTube.getVideoInfo(video, res);
+    else if(method == "playlist") return await YouTube.getPlaylist(video, res);
     break;
   case 'spotify':
-    if(method == "search") return searchVideo(video, res);
-    else if(method == "info") return getVideoInfo(video, res);
-    else if(method == "playlist") return searchPlaylist(video, res);
+    if(method == "search") return await YouTube.searchVideo(video, res);
+    else if(method == "info") return await YouTube.getVideoInfo(video, res);
+    else if(method == "playlist") return await YouTube.getPlaylist(video, res);
     break;
   default:
     return res.json({ error: 'Wtf?' });
