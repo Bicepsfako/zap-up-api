@@ -38,6 +38,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/:type/play/*", async (req, res) => {
     let video = decodeURIComponent(req.params[1]);
+    console.log(video);
     let type = decodeURIComponent(req.params.type);
     if (!video || !type) return res.json({ error: 'Invalid Parameters!' });
     return await Switch(video, type, "play", res);
