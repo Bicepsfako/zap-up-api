@@ -45,47 +45,26 @@ app.get("/api/:type/play/*", async (req, res) => {
 });
 
 app.get("/api/:type/search/*", async (req, res) => {
-    let video = decodeURIComponent(req.params[1]);
+    let video = decodeURIComponent(req.params[0]);
     let type = decodeURIComponent(req.params.type);
     if (!video || !type) return res.json({ error: 'Invalid Parameters!' });
     return await Switch(video, type, "search", res);
 });
 
 app.get("/api/:type/info/*", async (req, res) => {
-    let video = decodeURIComponent(req.params[1]);
+    let video = decodeURIComponent(req.params[0]);
     let type = decodeURIComponent(req.params.type);
     if (!video || !type) return res.json({ error: 'Invalid Parameters!' });
     return await Switch(video, type, "info", res);
 });
 
 app.get("/api/:type/playlist/*", async (req, res) => {
-    let video = decodeURIComponent(req.params[1]);
+    let video = decodeURIComponent(req.params[0]);
     let type = decodeURIComponent(req.params.type);
     if (!video || !type) return res.json({ error: 'Invalid Parameters!' });
     return await Switch(video, type, "playlist", res);
 });
 
 // YOUTUBE API END
-// SPOTIFY API START
-
-/*app.get("/api/spotify/search/*", async (req, res) => {
-    let video = decodeURIComponent(req.params[0]);
-    if (!video) return res.json({ error: 'Invalid Parameters!' });
-    return await Switch(video, "spotify", "search", res);
-});
-
-app.get("/api/spotify/info/*", async (req, res) => {
-    let video = decodeURIComponent(req.params[0]);
-    if (!video) return res.json({ error: 'Invalid Parameters!' });
-    return await Switch(video, "spotify", "info", res);
-});
-
-app.get("/api/spotify/playlist/*", async (req, res) => {
-    let playlist = decodeURIComponent(req.params[0]);
-    if (!playlist) return res.json({ error: 'Invalid Parameters!' });
-    return await Switch(playlist, "spotify", "playlist", res);
-});*/
-
-// SPOTIFY API END
 
 app.listen(process.env.PORT, () => console.log("API Running!"));
