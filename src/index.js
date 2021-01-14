@@ -12,13 +12,13 @@ app.use(express.urlencoded({
 
 async function Switch(video, type, method, res) {
 	if (!video) return res.json({
-		error: 'Wtf?'
+		error: 'The video is not specified.'
 	});
 	if (!type) return res.json({
-		error: 'Wtf?'
+		error: 'The platform is not specified.'
 	});
 	if (!method) return res.json({
-		error: 'Wtf?'
+		error: 'The method is not specified.'
 	});
 
 	switch (type) {
