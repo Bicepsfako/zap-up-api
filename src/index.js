@@ -1,6 +1,7 @@
 const express = require("express");
 const YouTube = require("./functions/youtube.js");
 const Spotify = require("./functions/spotify.js");
+const Instagram = require("./functions/instagram.js");
 const cors = require('cors');
 const app = express();
 
@@ -28,6 +29,9 @@ async function Switch(video, type, method, res) {
 			else if (method == "info") return await YouTube.getVideoInfo(video, res);
 			else if (method == "playlist") return await YouTube.getPlaylist(video, res);
 			break;
+                case 'instagram':
+                        if (method == "media") return await Instagram.getMedia(video, res);
+                        break;
 		case 'spotify':
 			if (method == "search") return await Spotify.searchVideo(video, res);
 			else if (method == "info") return await Spotify.getVideoInfo(video, res);
