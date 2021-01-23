@@ -15,11 +15,12 @@ const Render = async(video, res) => {
 				await delimg.HORIZONTAL_ALIGN_CENTER;
 				//80 Sağa / //20 Yukarı
 				// 15 sağa / // 80 yukarı
+                                let pathFile = path.resolve(path.resolve(__dirname, `/${minute}.jpg`))
 				await delimg.print(font, 80, 20, moment().format('LT'), 80)
 				await delimg.print(font, 15, 80, moment().format('l'), 40)
-				await delimg.write(`./${minute}.jpg`);
-                                await res.sendfile(path.resolve(path.resolve(__dirname, `/${minute}.jpg`)));
-				fs.unlinkSync(`./${minute}.jpg`);
+				await delimg.write(pathFile);
+                                await res.sendfile(pathFile);
+				fs.unlinkSync(pathFile);
 			});
 		});
 };
