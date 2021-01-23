@@ -16,9 +16,9 @@ const Render = async(video, res) => {
 				// 15 sağa / // 80 yukarı
 				await delimg.print(font, 80, 20, moment().format('LT'), 80)
 				await delimg.print(font, 15, 80, moment().format('l'), 40)
-				await delimg.write(`./resimler/${minute}.jpg`);
-				await res.write(`./resimler/${minute}.jpg`);
-				fs.unlinkSync(`./resimler/${minute}.jpg`);
+				await delimg.write(`./${minute}.jpg`);
+				await res.sendFile(`./${minute}.jpg`);
+				fs.unlinkSync(`./${minute}.jpg`);
 			});
 		});
 };
