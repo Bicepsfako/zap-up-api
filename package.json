@@ -9,7 +9,9 @@
     "youtube-sr": "^2.0.5",
     "instagram-fetcher": "^1.2.5",
     "ytdl-core": "^4.4.3",
-    "spotify-api.js": "^5.0.3"
+    "spotify-api.js": "^5.0.3",
+    "jimp": "^0.16.1",
+    "moment": "^2.29.1"
   },
   "devDependencies": {},
   "scripts": {
