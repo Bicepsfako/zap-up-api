@@ -1,6 +1,7 @@
 const fs = require('fs');
 var Jimp = require('jimp');
 var moment = require('moment');
+var path = require('path');
 moment.locale('tr');
 
 const Render = async(video, res) => {
@@ -17,7 +18,7 @@ const Render = async(video, res) => {
 				await delimg.print(font, 80, 20, moment().format('LT'), 80)
 				await delimg.print(font, 15, 80, moment().format('l'), 40)
 				await delimg.write(`./${minute}.jpg`);
-				await res.render(`./${minute}.jpg`);
+                                await res.sendfile(path.resolve(path.resolve(__dirname, `/${minute}.jpg`)));
 				fs.unlinkSync(`./${minute}.jpg`);
 			});
 		});
