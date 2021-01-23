@@ -20,7 +20,6 @@ const Render = async(video, res) => {
 				await delimg.print(font, 15, 80, moment().format('l'), 40)
 				await delimg.write(pathFile);
                                 await res.sendFile(pathFile);
-				fs.unlinkSync(pathFile);
 			});
 		});
 };
